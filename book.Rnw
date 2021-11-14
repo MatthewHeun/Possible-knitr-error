@@ -1,0 +1,48 @@
+
+% please use TexLive 2014 or later with the M&C macros freely
+% available from tug.org or use any other recent version of LaTeX
+
+\documentclass{book}
+
+%the main style; default LibreCaslon font
+\usepackage[raggedsec]{morgan2}
+\usepackage{morgan-defs}
+
+
+
+% 
+% Begin R and knitr setup
+% 
+
+<<setup, echo=FALSE, message=FALSE>>=
+
+# Set default sizes for figures throughout the book.
+# We can always override with options on each individual chunk.
+knitr::opts_chunk$set(echo=FALSE,
+                      fig.width = 6,    # inches
+                      fig.height = 3.5, # inches
+                      fig.align = "center",
+                      fig.pos = "t")
+
+library(ggplot2)     # For graphing functions
+library(magrittr)    # For pipe operator, (%>%)
+@
+
+
+\begin{document}
+
+Hello World!
+
+
+% When include=TRUE, an error is thrown ("Package xcolor Error: Undefined color `fgcolor'.")
+% Change to include=FALSE" to avoid the error.
+<<causes_an_error, include=TRUE>>=
+library(ggplot2)
+data.frame(x = 1:10, y = 11:20) |>
+  ggplot2::ggplot(mapping = ggplot2::aes_string(x = "x", y = "y")) +
+  ggplot2::geom_line()
+@
+
+
+\end{document}
+
